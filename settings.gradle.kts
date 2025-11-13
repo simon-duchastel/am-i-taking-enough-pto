@@ -3,8 +3,8 @@ rootProject.name = "am-i-taking-enough-pto"
 pluginManagement {
     repositories {
         google()
-        gradlePluginPortal()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
