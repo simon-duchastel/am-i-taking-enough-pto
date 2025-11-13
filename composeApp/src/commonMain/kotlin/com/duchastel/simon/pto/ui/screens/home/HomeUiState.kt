@@ -12,6 +12,7 @@ sealed interface HomeUiState : CircuitUiState {
         val targetDays: Int,
         val status: PTOStatus,
         val yearMode: YearMode,
+        val yearProgress: Float,
         val onToggleYearMode: () -> Unit,
         val onAddPTO: () -> Unit,
         val onViewPTO: () -> Unit,

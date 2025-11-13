@@ -53,9 +53,23 @@ class HomePresenter(
             }
         }
 
+        val yearProgress = when (yearMode) {
+            com.ptotracker.domain.models.YearMode.CALENDAR_YEAR -> {
+                val startOfYear = kotlinx.datetime.LocalDate(now.year, 1, 1)
+                val endOfYear = kotlinx.datetime.LocalDate(now.year, 12, 31)
+                val totalDaysInYear = endOfYear.toEpochDays() - startOfYear.toEpochDays() + 1
+                val daysSinceStart = now.date.toEpochDays() - startOfYear.toEpochDays()
+                (daysSinceStart.toFloat() / totalDaysInYear.toFloat()).coerceIn(0f, 1f)
+            }
+            com.ptotracker.domain.models.YearMode.ROLLING_365_DAYS -> {
+                1.0f
+            }
+        }
+
         val summary = PTOSummary.calculate(
             daysTaken = relevantDays.size,
-            targetDays = currentSettings.targetPTODays
+            targetDays = currentSettings.targetPTODays,
+            yearProgress = yearProgress
         )
 
         return HomeUiState.Loaded(
@@ -63,6 +77,7 @@ class HomePresenter(
             targetDays = summary.targetDays,
             status = summary.status,
             yearMode = currentSettings.yearMode,
+            yearProgress = yearProgress,
             onToggleYearMode = {
                 scope.launch {
                     val newMode = when (currentSettings.yearMode) {

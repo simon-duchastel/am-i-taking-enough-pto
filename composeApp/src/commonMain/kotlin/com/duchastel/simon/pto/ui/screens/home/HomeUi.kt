@@ -92,11 +92,25 @@ private fun HomeLoadedContent(state: HomeUiState.Loaded, modifier: Modifier = Mo
                 }
             }
 
-            Text(
-                text = "Target: ${state.targetDays} days",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Medium
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = "Target: ${state.targetDays} days",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Medium
+                )
+
+                if (state.yearMode == YearMode.CALENDAR_YEAR) {
+                    val expectedByNow = (state.targetDays * state.yearProgress).toInt()
+                    Text(
+                        text = "Expected by now: $expectedByNow days (${(state.yearProgress * 100).toInt()}% of year)",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
 
             val percentage = if (state.targetDays > 0) {
                 (state.daysTaken.toFloat() / state.targetDays.toFloat() * 100).toInt()
@@ -116,10 +130,24 @@ private fun HomeLoadedContent(state: HomeUiState.Loaded, modifier: Modifier = Mo
                 },
             )
 
+            val statusMessage = when {
+                state.yearMode == YearMode.ROLLING_365_DAYS ->
+                    "$percentage% of target"
+                else -> {
+                    val expectedByNow = (state.targetDays * state.yearProgress).toInt()
+                    when (state.status) {
+                        PTOStatus.GOOD -> "✓ On track or ahead of schedule"
+                        PTOStatus.WARNING -> "⚠ Slightly behind schedule"
+                        PTOStatus.CRITICAL -> "⚠ Behind schedule - time to book some PTO!"
+                    }
+                }
+            }
+
             Text(
-                text = "$percentage% of target",
+                text = statusMessage,
                 fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = if (state.status == PTOStatus.CRITICAL) FontWeight.Medium else FontWeight.Normal
             )
 
             Spacer(modifier = Modifier.weight(1f))
