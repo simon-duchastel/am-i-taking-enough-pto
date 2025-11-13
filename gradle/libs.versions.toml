@@ -6,7 +6,7 @@ circuit = "0.23.1"
 coroutines = "1.8.1"
 serialization = "1.7.1"
 datetime = "0.6.1"
-settings = "1.1.1"
+settings = "1.2.0"
 androidx-activity = "1.9.2"
 
 [libraries]
