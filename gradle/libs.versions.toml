@@ -1,0 +1,36 @@
+[versions]
+kotlin = "2.0.20"
+agp = "8.5.2"
+compose = "1.6.11"
+circuit = "0.23.1"
+coroutines = "1.8.1"
+serialization = "1.7.1"
+datetime = "0.6.1"
+settings = "1.1.1"
+androidx-activity = "1.9.2"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+
+circuit-foundation = { module = "com.slack.circuit:circuit-foundation", version.ref = "circuit" }
+circuit-runtime = { module = "com.slack.circuit:circuit-runtime", version.ref = "circuit" }
+circuit-runtime-presenter = { module = "com.slack.circuit:circuit-runtime-presenter", version.ref = "circuit" }
+circuit-overlay = { module = "com.slack.circuit:circuit-overlay", version.ref = "circuit" }
+circuit-retained = { module = "com.slack.circuit:circuit-retained", version.ref = "circuit" }
+
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "settings" }
+multiplatform-settings-noarg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
+multiplatform-settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization", version.ref = "settings" }
+
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
