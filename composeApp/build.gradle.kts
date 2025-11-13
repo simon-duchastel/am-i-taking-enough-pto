@@ -81,11 +81,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.ptotracker"
+    namespace = "com.duchastel.simon.pto"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.ptotracker"
+        applicationId = "com.duchastel.simon.pto"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
