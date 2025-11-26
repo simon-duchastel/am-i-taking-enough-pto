@@ -5,6 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import com.duchastel.simon.pto.domain.models.PTOSummary
+import com.duchastel.simon.pto.domain.models.YearMode
 import com.duchastel.simon.pto.domain.repository.PTORepository
 import com.duchastel.simon.pto.domain.repository.SettingsRepository
 import com.duchastel.simon.pto.ui.navigation.AddPTOScreen
@@ -43,10 +44,10 @@ class HomePresenter(
         val relevantDays = currentPTODays.filter { ptoDay ->
             val date = ptoDay.date
             when (yearMode) {
-                com.ptotracker.domain.models.YearMode.CALENDAR_YEAR -> {
+                YearMode.CALENDAR_YEAR -> {
                     date.year == now.year
                 }
-                com.ptotracker.domain.models.YearMode.ROLLING_365_DAYS -> {
+                YearMode.ROLLING_365_DAYS -> {
                     val daysDiff = date.toEpochDays() - now.date.toEpochDays()
                     daysDiff >= -365 && daysDiff <= 0
                 }
@@ -54,14 +55,14 @@ class HomePresenter(
         }
 
         val yearProgress = when (yearMode) {
-            com.ptotracker.domain.models.YearMode.CALENDAR_YEAR -> {
+            YearMode.CALENDAR_YEAR -> {
                 val startOfYear = kotlinx.datetime.LocalDate(now.year, 1, 1)
                 val endOfYear = kotlinx.datetime.LocalDate(now.year, 12, 31)
                 val totalDaysInYear = endOfYear.toEpochDays() - startOfYear.toEpochDays() + 1
                 val daysSinceStart = now.date.toEpochDays() - startOfYear.toEpochDays()
                 (daysSinceStart.toFloat() / totalDaysInYear.toFloat()).coerceIn(0f, 1f)
             }
-            com.ptotracker.domain.models.YearMode.ROLLING_365_DAYS -> {
+            YearMode.ROLLING_365_DAYS -> {
                 1.0f
             }
         }
@@ -81,10 +82,10 @@ class HomePresenter(
             onToggleYearMode = {
                 scope.launch {
                     val newMode = when (currentSettings.yearMode) {
-                        com.ptotracker.domain.models.YearMode.CALENDAR_YEAR ->
-                            com.ptotracker.domain.models.YearMode.ROLLING_365_DAYS
-                        com.ptotracker.domain.models.YearMode.ROLLING_365_DAYS ->
-                            com.ptotracker.domain.models.YearMode.CALENDAR_YEAR
+                        YearMode.CALENDAR_YEAR ->
+                            YearMode.ROLLING_365_DAYS
+                        YearMode.ROLLING_365_DAYS ->
+                            YearMode.CALENDAR_YEAR
                     }
                     settingsRepository.updateYearMode(newMode)
                 }

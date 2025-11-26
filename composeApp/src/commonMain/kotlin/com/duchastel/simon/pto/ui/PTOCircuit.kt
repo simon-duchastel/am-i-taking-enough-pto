@@ -19,6 +19,7 @@ import com.duchastel.simon.pto.ui.screens.settings.SettingsUiState
 import com.duchastel.simon.pto.ui.screens.viewpto.ViewPTOPresenter
 import com.duchastel.simon.pto.ui.screens.viewpto.ViewPTOUi
 import com.duchastel.simon.pto.ui.screens.viewpto.ViewPTOUiState
+import com.slack.circuit.backstack.rememberSaveableBackStack
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.CircuitContent
@@ -77,10 +78,8 @@ class PTOCircuitFactory(
 @Composable
 fun PTOApp(circuit: Circuit) {
     CircuitCompositionLocals(circuit) {
-        val navigator = rememberCircuitNavigator(HomeScreen)
-        NavigableCircuitContent(
-            navigator = navigator,
-            backStack = navigator.peekBackStack()
-        )
+        val backStack = rememberSaveableBackStack(root = HomeScreen)
+        val navigator = rememberCircuitNavigator(backStack)
+        NavigableCircuitContent(navigator, backStack)
     }
 }
