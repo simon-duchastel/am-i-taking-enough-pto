@@ -82,12 +82,12 @@ kotlin {
 
 android {
     namespace = "com.duchastel.simon.pto"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.duchastel.simon.pto"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
     }
