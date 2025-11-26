@@ -79,7 +79,13 @@ class PTOCircuitFactory(
 fun PTOApp(circuit: Circuit) {
     CircuitCompositionLocals(circuit) {
         val backStack = rememberSaveableBackStack(root = HomeScreen)
-        val navigator = rememberCircuitNavigator(backStack)
-        NavigableCircuitContent(navigator, backStack)
+        val navigator = rememberCircuitNavigator(
+            backStack = backStack,
+            onRootPop = { }, // no-op root pop
+        )
+        NavigableCircuitContent(
+            navigator = navigator,
+            backStack = backStack
+        )
     }
 }

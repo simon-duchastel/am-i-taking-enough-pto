@@ -1,7 +1,7 @@
 package com.duchastel.simon.pto.ui.navigation
 
+import com.duchastel.simon.pto.parcel.Parcelize
 import com.slack.circuit.runtime.screen.Screen
-import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 @Parcelize
