@@ -9,6 +9,7 @@ import com.duchastel.simon.pto.domain.models.YearMode
 import com.duchastel.simon.pto.domain.repository.PTORepository
 import com.duchastel.simon.pto.domain.repository.SettingsRepository
 import com.duchastel.simon.pto.ui.navigation.AddPTOScreen
+import com.duchastel.simon.pto.ui.navigation.CalendarScreen
 import com.duchastel.simon.pto.ui.navigation.HomeScreen
 import com.duchastel.simon.pto.ui.navigation.SettingsScreen
 import com.duchastel.simon.pto.ui.navigation.ViewPTOScreen
@@ -92,6 +93,7 @@ class HomePresenter(
             },
             onAddPTO = { navigator.goTo(AddPTOScreen) },
             onViewPTO = { navigator.goTo(ViewPTOScreen) },
+            onCalendar = { navigator.goTo(CalendarScreen) },
             onSettings = { navigator.goTo(SettingsScreen) }
         )
     }

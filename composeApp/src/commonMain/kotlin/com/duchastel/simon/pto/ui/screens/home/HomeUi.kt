@@ -170,6 +170,15 @@ private fun HomeLoadedContent(state: HomeUiState.Loaded, modifier: Modifier = Mo
                 Text("View PTO Days", fontSize = 18.sp)
             }
 
+            OutlinedButton(
+                onClick = state.onCalendar,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Text("📅 Calendar View", fontSize = 18.sp)
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,

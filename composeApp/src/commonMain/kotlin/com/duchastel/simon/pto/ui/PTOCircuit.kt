@@ -4,12 +4,16 @@ import androidx.compose.runtime.Composable
 import com.duchastel.simon.pto.domain.repository.PTORepository
 import com.duchastel.simon.pto.domain.repository.SettingsRepository
 import com.duchastel.simon.pto.ui.navigation.AddPTOScreen
+import com.duchastel.simon.pto.ui.navigation.CalendarScreen
 import com.duchastel.simon.pto.ui.navigation.HomeScreen
 import com.duchastel.simon.pto.ui.navigation.SettingsScreen
 import com.duchastel.simon.pto.ui.navigation.ViewPTOScreen
 import com.duchastel.simon.pto.ui.screens.addpto.AddPTOPresenter
 import com.duchastel.simon.pto.ui.screens.addpto.AddPTOUi
 import com.duchastel.simon.pto.ui.screens.addpto.AddPTOUiState
+import com.duchastel.simon.pto.ui.screens.calendar.CalendarPresenter
+import com.duchastel.simon.pto.ui.screens.calendar.CalendarUi
+import com.duchastel.simon.pto.ui.screens.calendar.CalendarUiState
 import com.duchastel.simon.pto.ui.screens.home.HomePresenter
 import com.duchastel.simon.pto.ui.screens.home.HomeUi
 import com.duchastel.simon.pto.ui.screens.home.HomeUiState
@@ -52,6 +56,7 @@ class PTOCircuitFactory(
             is AddPTOScreen -> AddPTOPresenter(navigator, ptoRepository)
             is ViewPTOScreen -> ViewPTOPresenter(navigator, ptoRepository)
             is SettingsScreen -> SettingsPresenter(navigator, settingsRepository)
+            is CalendarScreen -> CalendarPresenter(navigator, ptoRepository)
             else -> null
         }
     }
@@ -69,6 +74,9 @@ class PTOCircuitFactory(
             }
             is SettingsScreen -> ui<SettingsUiState> { state, modifier ->
                 SettingsUi(state, modifier)
+            }
+            is CalendarScreen -> ui<CalendarUiState> { state, modifier ->
+                CalendarUi(state, modifier)
             }
             else -> null
         }
