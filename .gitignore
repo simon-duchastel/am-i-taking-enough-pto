@@ -20,3 +20,5 @@ composeApp/build
 
 work-log*.md
 branches.md
+
+kotlin-js-store/
