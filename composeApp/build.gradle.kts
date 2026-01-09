@@ -48,15 +48,11 @@ kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
+                    static(project.rootDir.path)
+                    static(project.projectDir.path)
                 }
             }
         }
