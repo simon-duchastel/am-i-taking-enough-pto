@@ -19,3 +19,7 @@ data object ViewPTOScreen : Screen
 @Parcelize
 @Serializable
 data object SettingsScreen : Screen
+
+@Parcelize
+@Serializable
+data object CalendarScreen : Screen

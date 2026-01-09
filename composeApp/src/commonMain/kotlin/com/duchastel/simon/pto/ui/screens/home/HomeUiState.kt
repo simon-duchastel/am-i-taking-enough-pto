@@ -16,6 +16,7 @@ sealed interface HomeUiState : CircuitUiState {
         val onToggleYearMode: () -> Unit,
         val onAddPTO: () -> Unit,
         val onViewPTO: () -> Unit,
+        val onCalendar: () -> Unit,
         val onSettings: () -> Unit
     ) : HomeUiState
 }
